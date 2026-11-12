@@ -291,8 +291,12 @@ section{padding-block:clamp(64px,9vw,120px)}
 .box path{fill:none;stroke:#0E0C10;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s ease}
 .fit .yes button[aria-pressed="true"] .box{background:var(--mint);border-color:var(--mint);transform:scale(1.1)}
 .fit .yes button[aria-pressed="true"] .box path{stroke-dashoffset:0}
-.fit .no li{padding:14px 0 14px 38px;color:var(--muted);position:relative}
-.fit .no li::before{content:"";position:absolute;left:5px;top:50%;width:14px;height:2px;background:var(--muted)}
+.fit .no button{width:100%;padding:14px 0 14px 38px;color:var(--muted);position:relative;transition:color .3s,padding-left .3s var(--ease)}
+.fit .no button:hover{padding-left:44px;color:var(--ink)}
+.fit .no button::before{content:"";position:absolute;left:5px;top:50%;width:14px;height:2px;background:var(--muted)}
+.fit .no button span{background:linear-gradient(var(--rasp),var(--rasp)) no-repeat 0 58%/0% 2px;transition:background-size .5s var(--ease)}
+.fit .no button[aria-pressed="true"] span{background-size:100% 2px}
+.fit .no button[aria-pressed="true"]{color:color-mix(in srgb,var(--muted) 55%,transparent)}
 .score{margin-top:18px;padding:18px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:grid;gap:12px}
 .meter{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
 .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rasp),var(--mint));border-radius:999px;transition:width .6s var(--ease)}
@@ -338,8 +342,10 @@ section{padding-block:clamp(64px,9vw,120px)}
 .contact{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:start}
 @media(max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
 .contact-points{display:grid;gap:12px;margin-top:26px}
-.contact-points div{display:flex;gap:12px;align-items:center;color:var(--band-muted);font-size:.95rem}
-.contact-points i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:.75rem;background:var(--band-2);color:var(--mint);border:1px solid var(--band-line);flex:none}
+.contact-points button{display:flex;gap:12px;align-items:center;color:var(--band-muted);font-size:.95rem;transition:color .25s,transform .35s var(--ease)}
+.contact-points button:hover{color:var(--band-fg);transform:translateX(6px)}
+.contact-points i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:.75rem;background:var(--band-2);color:var(--mint);border:1px solid var(--band-line);flex:none;transition:background .25s,color .25s}
+.contact-points button:hover i{background:var(--mint);color:#0E0C10}
 form,.done{display:grid;gap:16px;background:var(--surface);color:var(--ink);border-radius:24px;padding:clamp(20px,3vw,34px)}
 .frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media(max-width:560px){.frow{grid-template-columns:minmax(0,1fr)}}
@@ -369,11 +375,53 @@ footer .logo span{color:var(--mint)}
 .totop circle{fill:none;stroke:var(--mint);stroke-width:3;stroke-dasharray:151;stroke-dashoffset:calc(151 - 151*var(--sp,0))}
 .totop span{font-size:1.1rem;font-weight:800}
 
+/* naslovi reč po reč */
+.w{display:inline-block}
+.js .head .w{opacity:.15;transform:translateY(.35em);transition:opacity .7s var(--ease),transform .7s var(--ease),color .3s;transition-delay:calc(var(--w)*45ms)}
+.js .head.in .w{opacity:1;transform:none}
+h2{cursor:pointer}
+.js .head h2 .w:hover{transform:translateY(-5px);color:var(--rasp);transition-delay:0s}
+.dark .head h2 .w:hover,.contact-band .head h2 .w:hover{color:var(--mint)}
+h2.wave .w{animation:wave .8s var(--ease) both;animation-delay:calc(var(--w)*45ms)!important}
+@keyframes wave{40%{transform:translateY(-12px);color:var(--rasp)}}
+.dark h2.wave .w,.contact-band h2.wave .w{animation-name:wave2}
+@keyframes wave2{40%{transform:translateY(-12px);color:var(--mint)}}
+
+/* linija pored oznake sekcije */
+.head>.eyebrow:first-child{display:inline-flex;align-items:center;gap:10px}
+.head>.eyebrow:first-child::before{content:"";height:2px;width:0;border-radius:2px;background:var(--rasp);transition:width .9s var(--ease) .15s}
+.head.in>.eyebrow:first-child::before,html:not(.js) .head>.eyebrow:first-child::before{width:30px}
+.dark .head>.eyebrow:first-child::before,.contact-band .head>.eyebrow:first-child::before{background:var(--mint)}
+
+/* marker */
+.hl{color:inherit;padding:0 2px;background:linear-gradient(transparent 60%,var(--mint-soft) 60%) no-repeat;background-size:0% 100%;transition:background-size 1.1s var(--ease) .45s}
+.in .hl,html:not(.js) .hl{background-size:100% 100%}
+.hero .hl{background-size:100% 100%;animation:hlin 1.2s var(--ease) 1s both}
+@keyframes hlin{from{background-size:0% 100%}}
+.dark .hl,.contact-band .hl,.together .hl{background-image:linear-gradient(transparent 60%,color-mix(in srgb,var(--rasp) 55%,transparent) 60%)}
+
+/* pojmovi sa objašnjenjem */
+.term{display:inline;font-weight:700;border-bottom:1.5px dashed var(--rasp);cursor:help;transition:color .2s,border-color .2s}
+.term:hover,.term[aria-expanded="true"]{color:var(--rasp);border-bottom-style:solid}
+.dark .term,.contact-band .term{border-color:var(--mint)}
+.dark .term:hover,.contact-band .term:hover{color:var(--mint)}
+.pop{position:absolute;z-index:80;width:min(290px,calc(100vw - 24px));background:var(--ink);color:var(--bg);padding:14px 16px;border-radius:16px;font-size:.88rem;line-height:1.5;box-shadow:0 24px 50px -24px rgba(0,0,0,.5);animation:popin .3s var(--ease) both}
+.pop b{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);margin-bottom:4px}
+@keyframes popin{from{opacity:0;transform:translateY(6px) scale(.97)}}
+
+/* sitni efekti */
+.plan li{transition:transform .3s var(--ease)}
+.plan li:hover{transform:translateX(6px)}
+.note{cursor:default;transition:color .3s}
+.note:hover{color:var(--ink)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
-  .js .reveal{opacity:1;transform:none}
+  .js .reveal,.js .head .w{opacity:1;transform:none}
   .check path{stroke-dashoffset:0}
+  .hl{background-size:100% 100%}
+  .head>.eyebrow:first-child::before{width:30px}
 }
 </style>
 
@@ -398,7 +446,7 @@ footer .logo span{color:var(--mint)}
     <div class="hero-copy">
       <span class="eyebrow up" style="--i:0">Hibridni coaching · snaga · kondicija · ishrana</span>
       <h1 id="h1">Telo koje prati nivo svega što si <em>izgradila.</em></h1>
-      <p class="lead up" style="--i:3">U biznisu imaš sistem. SVOJA 360 ti daje isti takav sistem za telo: plan snage i kondicije, ishranu sa svrhom i napredak koji vidiš u brojkama. Vode te dva stručnjaka, po jednom planu.</p>
+      <p class="lead up" style="--i:3">U biznisu imaš sistem. SVOJA 360 ti daje isti takav sistem za telo: plan snage i kondicije sa jasnom <button class="term" data-t="progresija">progresijom</button>, ishranu sa svrhom i <mark class="hl">napredak koji vidiš u brojkama</mark>. Vode te dva stručnjaka, po jednom planu.</p>
       <div class="cta-row up" style="--i:4">
         <a class="btn" href="#prijava">Prijavi se za razgovor <span class="arr">→</span></a>
         <a class="btn ghost" href="#program">Pogledaj program</a>
@@ -444,7 +492,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal">
       <span class="eyebrow">Protiv čega smo</span>
       <h2>Treniraš više od većine. A i dalje <em>tapkaš u mestu.</em></h2>
-      <p class="lead">Ne zato što ti fali volje. Nego zato što radiš bez plana, bez cilja na papiru i bez brojki koje bi ti rekle da li ideš napred.</p>
+      <p class="lead">Ne zato što ti fali volje. Nego zato što radiš bez plana, bez <mark class="hl">cilja na papiru</mark> i bez brojki koje bi ti rekle da li ideš napred.</p>
     </div>
     <div class="versus">
       <button class="flip reveal" aria-pressed="false" style="--d:0">
@@ -488,7 +536,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal" style="margin:0">
       <span class="eyebrow">Šta se menja za 3 meseca</span>
       <h2>Jača, izdržljivija i sa <em>jasnim planom.</em></h2>
-      <p class="lead">Na početku pravimo tvoj board: gde si sada, gde želiš da budeš i tačan put do tamo. Na kraju ponovo merimo, pa napredak vidiš crno na belo.</p>
+      <p class="lead">Na početku pravimo tvoj <button class="term" data-t="board">board</button>: gde si sada, gde želiš da budeš i tačan put do tamo. Na kraju ponovo merimo, pa napredak vidiš <mark class="hl">crno na belo</mark>.</p>
       <span class="tap">Klikni na stavku da vidiš kako merimo</span>
     </div>
     <div>
@@ -509,7 +557,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal">
       <span class="eyebrow">Program</span>
       <h2>Četiri oblasti. <em>Jedan sistem.</em></h2>
-      <p class="lead">Snaga, kondicija i ishrana ne rade odvojeno. Zato ih slažemo u jedan plan koji prati tvoje telo, tvoj kalendar i tvoj cilj.</p>
+      <p class="lead">Snaga, kondicija i ishrana ne rade odvojeno. Zato ih slažemo u <mark class="hl">jedan plan</mark> koji prati tvoje telo, tvoj kalendar i tvoj cilj.</p>
       <span class="tap">Otvori karticu za primer cilja</span>
     </div>
     <div class="quad">
@@ -550,6 +598,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal">
       <span class="eyebrow">Kako radimo</span>
       <h2>Od analize do <em>merljivog rezultata.</em></h2>
+      <p class="lead">Radimo u <button class="term" data-t="blok">blokovima</button>, a na svakih 6 nedelja ponavljamo <button class="term" data-t="testovi">testove</button>. Tako uvek znaš da li plan radi.</p>
       <span class="tap">Klikni na fazu</span>
     </div>
     <div class="how">
@@ -581,7 +630,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal">
       <span class="eyebrow">Ko te vodi</span>
       <h2>Dva stručnjaka. <em>Jedan plan.</em></h2>
-      <p class="lead">Trener kaže „treniraj više“, nutricionista kaže „jedi manje“. Kod nas se ta dva saveta prvo usklade, pa tek onda stignu do tebe.</p>
+      <p class="lead">Trener kaže „treniraj više“, nutricionista kaže „jedi manje“. Kod nas se ta dva saveta <mark class="hl">prvo usklade</mark>, pa tek onda stignu do tebe.</p>
     </div>
     <div class="team">
       <button class="flip reveal" aria-pressed="false" style="--d:0">
@@ -619,7 +668,7 @@ footer .logo span{color:var(--mint)}
       <div>
         <span class="eyebrow" style="color:var(--band-muted)">Zašto zajedno</span>
         <h3>Ne možeš da treniraš kao sportista, a da jedeš kao da si <em>na dijeti.</em></h3>
-        <p>Previše treninga uz premalo hrane koči napredak i remeti san, ciklus i imunitet. Zato obim treninga i ishranu usklađujemo zajedno, iz nedelje u nedelju.</p>
+        <p>Previše treninga uz premalo hrane koči napredak i remeti san, ciklus i imunitet. Zato obim treninga i ishranu <mark class="hl">usklađujemo zajedno</mark>, iz nedelje u nedelju. Probaj klizače.</p>
       </div>
       <div class="balance">
         <label for="r-tr">Treninga nedeljno: <span id="v-tr">4</span><input type="range" id="r-tr" min="1" max="7" value="4"></label>
@@ -655,12 +704,12 @@ footer .logo span{color:var(--mint)}
       </div>
       <div class="no reveal" style="--d:1">
         <h3>Ovo nije za tebe ako</h3>
-        <p class="hint" style="margin-bottom:10px">I to je u redu.</p>
+        <p class="hint" style="margin-bottom:10px">Precrtaj ono što nisi ti.</p>
         <ul>
-          <li>Tražiš čarobno rešenje i brze kilograme</li>
-          <li>Uvek imaš razlog zašto sad nije trenutak</li>
-          <li>Treniraš zbog story-ja, a ne zbog sebe</li>
-          <li>Ne želiš da pratiš trening i ishranu</li>
+          <li><button aria-pressed="false"><span>Tražiš čarobno rešenje i brze kilograme</span></button></li>
+          <li><button aria-pressed="false"><span>Uvek imaš razlog zašto sad nije trenutak</span></button></li>
+          <li><button aria-pressed="false"><span>Treniraš zbog story-ja, a ne zbog sebe</span></button></li>
+          <li><button aria-pressed="false"><span>Ne želiš da pratiš trening i ishranu</span></button></li>
         </ul>
       </div>
     </div>
@@ -672,6 +721,7 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal">
       <span class="eyebrow">Saradnja</span>
       <h2>Izaberi svoj <em>ritam.</em></h2>
+      <p class="lead">Oba paketa uključuju nedeljni <button class="term" data-t="checkin">check-in</button> i tumačenje <button class="term" data-t="sat">podataka sa sata</button>.</p>
     </div>
     <div class="bill reveal" id="bill" role="group" aria-label="Način plaćanja">
       <i class="pill" aria-hidden="true"></i>
@@ -718,11 +768,11 @@ footer .logo span{color:var(--mint)}
     <div class="head reveal" style="margin:0">
       <span class="eyebrow">Prijava</span>
       <h2>Hajde da tvoj cilj stavimo <em>na papir.</em></h2>
-      <p class="lead">Popuni prijavu, a mi ti se javljamo sa terminom za razgovor. Na razgovoru dobijaš procenu i predlog plana za svoj slučaj.</p>
+      <p class="lead">Popuni prijavu, a mi ti se javljamo sa terminom za razgovor. Na razgovoru dobijaš procenu i <mark class="hl">predlog plana za svoj slučaj</mark>.</p>
       <div class="contact-points">
-        <div><i>1</i>Popuniš prijavu za 2 minuta</div>
-        <div><i>2</i>Javimo ti se u roku od 24h</div>
-        <div><i>3</i>Na razgovoru dobiješ plan za svoj slučaj</div>
+        <button type="button" data-f="f-ime"><i>1</i>Popuniš prijavu za 2 minuta</button>
+        <button type="button" data-f="f-kontakt"><i>2</i>Javimo ti se u roku od 24h</button>
+        <button type="button" data-f="f-poruka"><i>3</i>Na razgovoru dobiješ plan za svoj slučaj</button>
       </div>
     </div>
     <div class="reveal">
@@ -796,6 +846,40 @@ footer .logo span{color:var(--mint)}
       else {n.classList.add('word');n.style.setProperty('--w',w++);}
     });
   }
+
+  // h2 reč po reč + talas na klik
+  function split(el){var w=0;(function walk(node){[].slice.call(node.childNodes).forEach(function(n){
+    if(n.nodeType===3){var fr=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(function(p){if(!p)return;if(/^\s+$/.test(p)){fr.appendChild(document.createTextNode(p));return;}var s=document.createElement('span');s.className='w';s.style.setProperty('--w',w++);s.textContent=p;fr.appendChild(s);});node.replaceChild(fr,n);}
+    else if(n.nodeType===1)walk(n);});})(el);}
+  $$('h2').forEach(function(h){split(h);h.addEventListener('click',function(){if(reduce)return;h.classList.remove('wave');void h.offsetWidth;h.classList.add('wave');setTimeout(function(){h.classList.remove('wave');},1500);});});
+
+  // pojmovi
+  var G={board:['Board','Tvoja tabla sa ciljem, početnim brojkama i planom. Uvek vidiš gde si i koliko ti je ostalo do cilja.'],
+    progresija:['Progresija','Postepeno povećanje kilaže, ponavljanja ili tempa, da telo stalno ima razlog da napreduje.'],
+    blok:['Blok','Faza od oko 4 nedelje sa jednim fokusom. Poslednja nedelja je lakša, da telo stigne da se oporavi.'],
+    testovi:['Testovi','Ista merenja na početku, u sredini i na kraju: snaga, kondicija i obimi. Tako napredak vidiš u brojkama.'],
+    checkin:['Check-in','Kratak pregled jednom nedeljno: trening, san, energija, obimi i podaci sa sata. Na osnovu njega prilagođavamo plan.'],
+    sat:['Podaci sa sata','Puls u mirovanju, HRV, san i tempo. Pomažu nam da znamo kada da guramo, a kada da usporimo.']};
+  var pop=null,popT=null;
+  function closePop(){if(pop){pop.remove();pop=null;}if(popT){popT.setAttribute('aria-expanded','false');popT=null;}}
+  $$('.term').forEach(function(t){t.type='button';t.setAttribute('aria-expanded','false');t.addEventListener('click',function(e){
+    e.stopPropagation(); if(popT===t){closePop();return;} closePop();
+    var g=G[t.getAttribute('data-t')]; if(!g)return;
+    pop=document.createElement('div');pop.className='pop';pop.setAttribute('role','tooltip');
+    var b=document.createElement('b');b.textContent=g[0];var s=document.createElement('span');s.textContent=g[1];pop.appendChild(b);pop.appendChild(s);document.body.appendChild(pop);
+    var r=t.getBoundingClientRect(),pw=pop.offsetWidth,vw=document.documentElement.clientWidth;
+    pop.style.left=Math.min(Math.max(12,r.left+r.width/2-pw/2),vw-pw-12)+'px'; pop.style.top=(r.bottom+window.scrollY+10)+'px';
+    t.setAttribute('aria-expanded','true');popT=t;
+  });});
+  document.addEventListener('click',function(e){if(pop&&!pop.contains(e.target))closePop();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closePop();});
+  window.addEventListener('resize',closePop);
+
+  // nije za tebe: precrtavanje
+  $$('.fit .no button').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});});
+
+  // koraci prijave vode do polja
+  $$('.contact-points button').forEach(function(b){b.addEventListener('click',function(){var el=document.getElementById(b.getAttribute('data-f'));if(!el||el.offsetParent===null)return;el.focus({preventScroll:true});el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});});});
 
   // reveal
   var els=$$('.reveal');

@@ -319,7 +319,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .day.k small{color:inherit;opacity:.7}
 .day.pop-in{animation:dayin .5s var(--ease) both;animation-delay:calc(var(--i)*60ms)}
 @keyframes dayin{from{transform:scale(.85);opacity:.3}}
-.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
 .seg button{padding:9px 16px;min-height:40px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--muted);transition:background .3s,color .3s}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .legend2{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:10px}
@@ -372,7 +372,8 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .mono-a.m{background:var(--mint);color:#0E0C10}
 .flip:hover .mono-a{transform:rotate(-10deg) scale(1.06)}
 .team .turn{color:var(--rasp)}
-.together{margin-top:18px;border-radius:24px;background:var(--band);color:var(--band-fg);padding:clamp(24px,4vw,48px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:24px;align-items:center}
+.together{margin-top:18px;border-radius:24px;background:var(--band);color:var(--band-fg);padding:clamp(24px,4vw,48px);display:grid;gap:24px;transition:transform .45s var(--ease),box-shadow .4s}
+@media(hover:hover){.together:hover{transform:translateY(-4px);box-shadow:0 30px 60px -40px var(--mint)}}
 @media(max-width:760px){.together{grid-template-columns:minmax(0,1fr)}}
 .together h3{font-size:clamp(1.7rem,3.2vw,2.5rem)}
 .together em{color:var(--mint)}
@@ -691,23 +692,6 @@ footer nav a:hover{color:var(--mint)}
       </button>
     </div>
     <div class="dots" id="dots" aria-label="Kartice"></div>
-
-    <div class="tool reveal">
-      <div>
-        <span class="eyebrow">Probaj odmah</span>
-        <h3>Koliko proteina ti treba?</h3>
-        <p>Većina žena koje treniraju unese upola manje proteina nego što im treba, iako „jedu zdravo“. Pomeri klizač na svoju kilažu.</p>
-      </div>
-      <div class="slider">
-        <label for="r-kg">Tvoja kilaža <output id="o-kg">65 kg</output></label>
-        <input type="range" id="r-kg" min="45" max="110" value="65">
-        <div class="result">
-          <div><b id="p-day">104</b><span>grama proteina dnevno</span></div>
-          <div><b id="p-meal">26</b><span>grama po obroku, u 4 obroka</span></div>
-        </div>
-        <p class="hint">Okvirno, oko 1,6 g po kilogramu za ženu koja trenira. Tačan broj za tebe dobijaš na analizi.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -748,15 +732,17 @@ footer nav a:hover{color:var(--mint)}
       <div>
         <span class="eyebrow">Probaj odmah</span>
         <h3>Kako izgleda tvoja nedelja?</h3>
-        <p>Izaberi koliko dana možeš da treniraš. Ovo je primer rasporeda, a pravi pravimo oko tvog kalendara.</p>
+        <p>Izaberi koliko dana nedeljno želiš da treniraš. Ovo je primer kako spajamo snagu i trčanje, a pravi raspored pravimo oko tvog kalendara i cilja.</p>
         <div class="seg" id="seg" role="group" aria-label="Broj treninga nedeljno" style="margin-top:16px">
           <button type="button" aria-pressed="true" data-n="3">3 dana</button>
           <button type="button" aria-pressed="false" data-n="4">4 dana</button>
+          <button type="button" aria-pressed="false" data-n="5">5 dana</button>
+          <button type="button" aria-pressed="false" data-n="6">6 dana</button>
         </div>
       </div>
       <div>
         <div class="week" id="week" aria-live="polite"></div>
-        <div class="legend2"><span class="ls">Snaga</span><span class="lk">Kondicija</span><span>Oporavak i šetnja</span></div>
+        <div class="legend2"><span class="ls">Snaga</span><span class="lk">Trčanje</span><span>Odmor</span></div>
       </div>
     </div>
   </div>
@@ -805,12 +791,7 @@ footer nav a:hover{color:var(--mint)}
       <div>
         <span class="eyebrow" style="color:var(--band-muted)">Zašto zajedno</span>
         <h3>Ne možeš da treniraš kao sportista, a da jedeš kao da si <em>na dijeti.</em></h3>
-        <p>Puno treninga uz premalo hrane koči napredak i remeti san, ciklus i imunitet. Zato obim treninga i ishranu <mark class="hl">usklađujemo zajedno</mark>, iz nedelje u nedelju. Probaj sama.</p>
-      </div>
-      <div class="balance">
-        <label for="r-tr">Treninga nedeljno <b id="v-tr">4</b><input type="range" id="r-tr" min="1" max="7" value="4"></label>
-        <label for="r-hr">Hrana u odnosu na potrebe <b id="v-hr">premalo</b><input type="range" id="r-hr" min="1" max="3" value="1"></label>
-        <div class="verdict" id="verdict" aria-live="polite"></div>
+        <p>Puno treninga uz premalo hrane koči napredak i remeti san, ciklus i imunitet. Zato obim treninga i ishranu <mark class="hl">usklađujemo zajedno</mark>, iz nedelje u nedelju.</p>
       </div>
     </div>
   </div>
@@ -1105,14 +1086,12 @@ footer nav a:hover{color:var(--mint)}
   function fill(r){r.style.setProperty('--fill',((r.value-r.min)/(r.max-r.min)*100)+'%');}
   $$('input[type=range]').forEach(function(r){fill(r);r.addEventListener('input',function(){fill(r);});});
 
-  // protein
-  var kg=$('#r-kg'),okg=$('#o-kg'),pd=$('#p-day'),pm=$('#p-meal');
-  function prot(){var w=+kg.value,day=Math.round(w*1.6/5)*5;okg.textContent=w+' kg';pd.textContent=day;pm.textContent=Math.round(day/4);}
-  kg.addEventListener('input',prot); prot();
 
   // nedelja
-  var W={3:[['Pon','s','Snaga A'],['Uto','o','Šetnja'],['Sre','k','Intervali'],['Čet','o','Odmor'],['Pet','s','Snaga B'],['Sub','o','Šetnja'],['Ned','o','Odmor']],
-         4:[['Pon','s','Snaga A'],['Uto','k','Lagano'],['Sre','o','Odmor'],['Čet','s','Snaga B'],['Pet','o','Šetnja'],['Sub','k','Duže'],['Ned','o','Odmor']]};
+  var W={3:[['Pon','s','Snaga A'],['Uto','o','Odmor'],['Sre','k','Trčanje'],['Čet','o','Odmor'],['Pet','s','Snaga B'],['Sub','o','Odmor'],['Ned','o','Odmor']],
+         4:[['Pon','s','Snaga A'],['Uto','k','Lagano'],['Sre','o','Odmor'],['Čet','s','Snaga B'],['Pet','o','Odmor'],['Sub','k','Duže'],['Ned','o','Odmor']],
+         5:[['Pon','s','Snaga A'],['Uto','k','Lagano'],['Sre','s','Snaga B'],['Čet','o','Odmor'],['Pet','k','Intervali'],['Sub','k','Duže'],['Ned','o','Odmor']],
+         6:[['Pon','s','Snaga A'],['Uto','k','Lagano'],['Sre','s','Snaga B'],['Čet','k','Intervali'],['Pet','s','Snaga C'],['Sub','k','Duže'],['Ned','o','Odmor']]};
   var week=$('#week');
   function drawWeek(n){week.innerHTML='';W[n].forEach(function(d,i){var el=document.createElement('div');el.className='day'+(d[1]==='o'?'':' '+d[1])+(reduce?'':' pop-in');el.style.setProperty('--i',i);var s=document.createElement('small');s.textContent=d[0];var t=document.createElement('i');t.textContent=d[2];el.appendChild(s);el.appendChild(t);week.appendChild(el);});}
   $$('#seg button').forEach(function(b){b.addEventListener('click',function(){$$('#seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});drawWeek(b.getAttribute('data-n'));vib();});});
@@ -1126,19 +1105,6 @@ footer nav a:hover{color:var(--mint)}
   $('#s-next').addEventListener('click',function(){setStep(sk<stepBtns.length-1?sk+1:0);});
   setStep(0);
 
-  // balans
-  var rt=$('#r-tr'),rh=$('#r-hr'),vt=$('#v-tr'),vh=$('#v-hr'),ver=$('#verdict');
-  function bal(){
-    var t=+rt.value,h=+rh.value; vt.textContent=t; vh.textContent=['premalo','taman','previše'][h-1];
-    var msg,cls;
-    if(h===1&&t>=4){msg='Puno treninga, premalo hrane. Snaga pada, a san i ciklus trpe.';cls='bad';}
-    else if(h===1){msg='Premalo hrane. Oporavak je spor, a napredak stoji.';cls='bad';}
-    else if(h===3&&t<=2){msg='Hrane ima više nego što trening traži. Treba ih uskladiti.';cls='';}
-    else if(t>=6){msg='Dosta treninga. Plan mora da ima i lakše dane za oporavak.';cls='';}
-    else {msg='Dobar balans. Ovo je zona u kojoj napreduješ.';cls='ok';}
-    ver.textContent=msg; ver.className='verdict'+(cls?' '+cls:'');
-  }
-  rt.addEventListener('input',bal); rh.addEventListener('input',bal); bal();
 
   // za koga
   var yes=$$('.fit .yes button'),meter=$('#meter'),st=$('#score-t'),sb=$('#score-b');

@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="SVOJA 360 - hibridni coaching: snaga, kondicija i ishrana. Natalija i Anđela.">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>SVOJA 360</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: svetle sekcije presečene crnim trakama; malina za akciju, menta za napredak; sve kartice reaguju na klik. */
+:root{
+  --bg:#F3F2F0; --surface:#FFFFFF; --ink:#0E0C10; --muted:#5C5660; --line:#DEDBDF;
+  --rasp:#C2255C; --rasp-soft:#FBE2EB; --on-rasp:#FFFFFF;
+  --mint:#8ED6B8; --mint-ink:#1D6B50; --mint-soft:#DDF3EA;
+  --band:#0E0C10; --band-2:#1C181E; --band-fg:#F6F3F5; --band-muted:#A9A1AD; --band-line:#2F2932;
+  --display:"Instrument Serif","Iowan Old Style",Georgia,serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --maxw:1120px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C0A0D; --surface:#16121A; --ink:#F4F0F3; --muted:#A79FAB; --line:#2C2530;
+  --rasp:#F2669A; --rasp-soft:#3A1527; --on-rasp:#16080E;
+  --mint:#8ED6B8; --mint-ink:#8ED6B8; --mint-soft:#132A22;
+  --band:#1A151C; --band-2:#241D27; --band-fg:#F6F3F5; --band-muted:#A9A1AD; --band-line:#3A323D; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0C0A0D; --surface:#16121A; --ink:#F4F0F3; --muted:#A79FAB; --line:#2C2530;
+  --rasp:#F2669A; --rasp-soft:#3A1527; --on-rasp:#16080E;
+  --mint:#8ED6B8; --mint-ink:#8ED6B8; --mint-soft:#132A22;
+  --band:#1A151C; --band-2:#241D27; --band-fg:#F6F3F5; --band-muted:#A9A1AD; --band-line:#3A323D; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.06;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.7rem,6.6vw,5.3rem)}
+h2{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+h3{font-size:1.65rem}
+em{font-style:italic;color:var(--rasp)}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.12rem;color:var(--muted);max-width:56ch}
+section{padding-block:clamp(64px,9vw,120px)}
+.head{display:grid;gap:18px;margin-bottom:clamp(32px,5vw,56px);max-width:760px}
+.hint{font-size:.84rem;color:var(--muted)}
+.tap{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rasp);display:inline-flex;align-items:center;gap:6px}
+.tap::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+:focus-visible{outline:2px solid var(--rasp);outline-offset:3px;border-radius:8px}
+
+/* traka napretka */
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:70;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--rasp),var(--mint))}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--display);font-size:1.55rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.logo .ring{width:22px;height:22px;border-radius:50%;border:2px solid var(--rasp);border-right-color:var(--mint);transition:transform .8s var(--ease)}
+.logo:hover .ring{transform:rotate(360deg)}
+.logo span{color:var(--rasp);font-style:italic}
+.links{display:flex;gap:26px;align-items:center}
+.links a{font-size:.88rem;text-decoration:none;color:var(--muted);position:relative;transition:color .2s}
+.links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--rasp);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.links a:not(.btn):hover,.links a.active{color:var(--ink)}
+.links a:not(.btn):hover::after,.links a.active::after{transform:scaleX(1)}
+@media(max-width:860px){.links a:not(.btn){display:none}}
+
+/* dugmad */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;font:700 .92rem var(--body);text-decoration:none;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);padding:14px 24px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s,border-color .25s,box-shadow .3s;will-change:transform}
+.btn:hover{background:var(--rasp);border-color:var(--rasp);color:var(--on-rasp);box-shadow:0 14px 30px -14px var(--rasp)}
+.btn .arr{display:inline-block;transition:transform .25s}
+.btn:hover .arr{transform:translateX(5px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{background:transparent;color:var(--rasp);border-color:var(--rasp);box-shadow:none}
+.btn.mint{background:var(--mint);border-color:var(--mint);color:#0E0C10}
+.btn.mint:hover{background:var(--band-fg);border-color:var(--band-fg);color:#0E0C10;box-shadow:0 14px 30px -14px var(--mint)}
+.btn.sm{padding:9px 17px;font-size:.84rem}
+.ripple{position:absolute;border-radius:50%;pointer-events:none;background:currentColor;opacity:.25;transform:scale(0);animation:rip .7s ease-out forwards}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+
+/* ulazne animacije */
+.up{animation:up .9s var(--ease) both;animation-delay:calc(var(--i,0)*110ms)}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.js .reveal{opacity:.2;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
+.js .reveal.in{opacity:1;transform:none}
+.word{display:inline-block;animation:word .9s var(--ease) both;animation-delay:calc(var(--w)*70ms + 120ms)}
+@keyframes word{from{opacity:0;transform:translateY(.45em) rotate(2deg)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(40px,7vw,90px) clamp(56px,7vw,100px)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);transition:all .25s}
+.chip:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-2px)}
+
+/* board */
+.board{background:var(--band);color:var(--band-fg);border-radius:24px;padding:22px;display:grid;gap:16px;min-width:0;box-shadow:0 40px 80px -46px var(--rasp);animation:up 1s var(--ease) .35s both, float 7s ease-in-out 1.6s infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.board-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.board-top b{font-family:var(--display);font-weight:400;font-size:1.45rem}
+.tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);border:1px solid var(--band-line);padding:4px 9px;border-radius:999px;white-space:nowrap}
+.tabs{display:flex;gap:6px;background:var(--band-2);padding:4px;border-radius:999px;position:relative}
+.tabs button{flex:1;text-align:center;font-size:.8rem;font-weight:700;padding:8px 10px;border-radius:999px;color:var(--band-muted);position:relative;z-index:1;transition:color .3s}
+.tabs button[aria-selected="true"]{color:#0E0C10}
+.tabs .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px - 12px)/3);border-radius:999px;background:var(--mint);transition:transform .5s var(--ease)}
+.chart{width:100%;height:auto;display:block;cursor:crosshair}
+.chart .grid{stroke:var(--band-line);stroke-width:1}
+.chart .ln{fill:none;stroke:var(--rasp);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.chart .area{fill:url(#ga)}
+.chart .dot{fill:var(--mint);stroke:var(--band);stroke-width:3}
+.chart .hov{fill:var(--band-fg);opacity:0;transition:opacity .2s}
+.chart .vline{stroke:var(--band-muted);stroke-dasharray:3 4;opacity:0;transition:opacity .2s}
+.chart text{font-family:var(--mono);font-size:9px;fill:var(--band-muted)}
+.chart .tip{fill:var(--band-fg);font-size:10px;opacity:0;transition:opacity .2s}
+.metrics{display:grid}
+.metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--band-line);transition:opacity .35s,transform .35s var(--ease)}
+.metrics.swap .metric{opacity:0;transform:translateX(12px)}
+.metric span{font-size:.86rem;color:var(--band-muted)}
+.metric b{font-family:var(--mono);font-weight:500;font-size:.92rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.metric b i{font-style:normal;color:var(--mint)}
+
+/* marquee */
+.marquee{background:var(--band);color:var(--band-fg);overflow:hidden;padding-block:22px}
+.track{display:flex;gap:56px;width:max-content;animation:scroll 40s linear infinite}
+.track.rev{animation-direction:reverse;animation-duration:52s;margin-top:10px;opacity:.55}
+.track a{font-family:var(--display);font-size:1.7rem;white-space:nowrap;text-decoration:none;transition:color .25s}
+.track a:hover{color:var(--mint)}
+.track a::after{content:"✦";margin-left:56px;color:var(--rasp);font-size:.9rem;vertical-align:middle}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* crna sekcija: protiv */
+.dark{background:var(--band);color:var(--band-fg)}
+.dark .eyebrow,.dark .lead{color:var(--band-muted)}
+.dark em{color:var(--mint)}
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media(max-width:720px){.versus{grid-template-columns:minmax(0,1fr)}}
+
+/* flip kartice */
+.flip{perspective:1400px;width:100%;display:block}
+.flip-in{display:grid;transition:transform .9s var(--ease);transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;padding:clamp(24px,3.6vw,40px);display:grid;gap:14px;align-content:start}
+.face.back{transform:rotateY(180deg)}
+.versus .face.front{background:var(--band-2);border:1px solid var(--band-line)}
+.versus .face.back{background:var(--mint);color:#0E0C10}
+.versus .face.back .eyebrow{color:#1D4D3B}
+.versus .face.back em{color:#0E0C10}
+.versus h3 s{text-decoration-color:var(--rasp);text-decoration-thickness:3px}
+.versus p{color:var(--band-muted)}
+.versus .back p{color:#1C2E27}
+.flip:hover .face.front{border-color:var(--rasp)}
+.turn{margin-top:auto;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;gap:8px;align-items:center;color:var(--mint)}
+.back .turn{color:#0E0C10}
+.turn svg{width:16px;height:16px;transition:transform .5s var(--ease)}
+.flip:hover .turn svg{transform:rotate(180deg)}
+
+/* rezultati */
+.results{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media(max-width:860px){.results{grid-template-columns:minmax(0,1fr)}}
+.acc{list-style:none;margin:0;padding:0}
+.acc>li{border-top:1px solid var(--line)}
+.acc>li:last-child{border-bottom:1px solid var(--line)}
+.acc button.row-b{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start;padding:20px 0;transition:padding-left .35s var(--ease)}
+.acc button.row-b:hover{padding-left:10px}
+.check{width:26px;height:26px;border-radius:50%;background:var(--mint-soft);display:grid;place-items:center;margin-top:2px;transition:background .3s,transform .4s var(--ease)}
+.check svg{width:14px;height:14px}
+.check path{fill:none;stroke:var(--mint-ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset .7s ease .2s}
+.in .check path,html:not(.js) .check path{stroke-dashoffset:0}
+.acc li.open .check{background:var(--mint);transform:scale(1.1)}
+.acc li.open .check path{stroke:#0E0C10}
+.acc b{font-family:var(--display);font-weight:400;font-size:1.4rem;line-height:1.2;display:block}
+.acc small{color:var(--muted);font-size:.93rem;display:block}
+.plus{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);color:var(--rasp);transition:transform .4s var(--ease),background .3s,border-color .3s}
+.acc li.open .plus{transform:rotate(45deg);background:var(--rasp);color:var(--on-rasp);border-color:var(--rasp)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.more>div{overflow:hidden}
+.open>.more,.open .more{grid-template-rows:1fr}
+.more p{padding:0 0 20px 42px;font-size:.93rem}
+.more .eyebrow{display:block;color:var(--rasp);margin-bottom:4px}
+.note{font-size:.82rem;color:var(--muted);margin-top:18px}
+
+/* kvadrati */
+.quad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+@media(max-width:720px){.quad{grid-template-columns:minmax(0,1fr)}}
+.q{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3vw,34px);display:grid;gap:14px;align-content:start;position:relative;overflow:hidden;transition:transform .45s var(--ease),border-color .3s,box-shadow .4s;transform-style:preserve-3d}
+.q:hover{border-color:var(--ink);box-shadow:0 30px 60px -40px color-mix(in srgb,var(--ink) 50%,transparent)}
+.q::before{content:"";position:absolute;inset:auto -40px -40px auto;width:200px;height:200px;border-radius:50%;background:var(--c-soft,var(--rasp-soft));transform:scale(.3);opacity:0;transition:transform .7s var(--ease),opacity .4s}
+.q:hover::before,.q.open::before{transform:scale(1.2);opacity:1}
+.q>*{position:relative;z-index:1}
+.q[aria-expanded="true"]{border-color:var(--c,var(--rasp))}
+.q .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--c,var(--rasp));transition:transform .5s var(--ease)}
+.q:hover .ico{transform:rotate(-6deg) scale(1.06)}
+.q .ico svg{width:30px;height:30px}
+.q .ico svg *{fill:none;stroke:var(--c-on,#fff);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.q.m{--c:var(--mint);--c-soft:var(--mint-soft);--c-on:#0E0C10}
+.q.k{--c:var(--ink);--c-soft:color-mix(in srgb,var(--ink) 8%,transparent);--c-on:var(--bg)}
+.q p{color:var(--muted)}
+.q ul.tags{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.q ul.tags li{font-family:var(--mono);font-size:.7rem;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted);background:var(--bg)}
+.q .more p{padding:0}
+.q .detail{display:grid;gap:10px;padding-top:6px;border-top:1px dashed var(--line);margin-top:4px}
+.q .detail div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;font-size:.92rem}
+.q .detail span{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.q:hover .bar{animation:grow 1s ease both}
+@keyframes grow{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+.bar{transform-origin:bottom;transform-box:fill-box}
+.q:hover .pulse{stroke-dasharray:90;animation:draw2 1.2s ease both}
+@keyframes draw2{from{stroke-dashoffset:90}to{stroke-dashoffset:0}}
+.q:hover .spin{animation:spin 1.6s var(--ease) both;transform-origin:center;transform-box:fill-box}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* kako */
+.how{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media(max-width:860px){.how{grid-template-columns:minmax(0,1fr)}}
+.steps{position:relative;display:grid;padding-left:38px}
+.steps::before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:2px;background:var(--line);border-radius:2px}
+.steps .fill{position:absolute;left:9px;top:12px;width:2px;height:calc((100% - 24px)*var(--p,0));background:linear-gradient(var(--rasp),var(--mint));border-radius:2px;transition:height .7s var(--ease)}
+.step{width:100%;position:relative;display:block;padding:6px 0 22px}
+.step::before{content:"";position:absolute;left:-36px;top:12px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--line);transition:all .4s var(--ease);z-index:1}
+.step.done::before{background:var(--mint);border-color:var(--mint)}
+.step.cur::before{background:var(--rasp);border-color:var(--rasp);box-shadow:0 0 0 6px var(--rasp-soft);transform:scale(1.1)}
+.step .eyebrow{display:block;color:var(--rasp)}
+.step b{font-family:var(--display);font-weight:400;font-size:1.55rem;display:block;line-height:1.2;transition:color .3s}
+.step:hover b{color:var(--rasp)}
+.step .more p{padding:6px 0 0;color:var(--muted);font-size:.95rem}
+.step.cur .more{grid-template-rows:1fr}
+.inc-box{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,2.6vw,28px)}
+.inc-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.inc-head b{font-family:var(--display);font-weight:400;font-size:1.5rem}
+.inc{list-style:none;margin:0;padding:0}
+.inc>li{border-top:1px solid var(--line)}
+.inc button.row-b{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;transition:padding-left .35s var(--ease)}
+.inc button.row-b:hover{padding-left:8px}
+.inc b{font-weight:700;font-size:.97rem}
+.inc .more p{padding:0 0 14px;color:var(--muted);font-size:.9rem}
+.inc .more .why{color:var(--mint-ink);font-weight:600}
+.inc .plus{width:26px;height:26px;font-size:.9rem}
+.inc li.open .plus{transform:rotate(45deg);background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* tim */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media(max-width:720px){.team{grid-template-columns:minmax(0,1fr)}}
+.team .face{border:1px solid var(--line);background:var(--surface)}
+.team .face.back{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.team .face.back ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.team .face.back li{padding-left:22px;position:relative;opacity:.86}
+.team .face.back li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--mint)}
+.team .face.back .turn{color:var(--mint)}
+.team .face.front p{color:var(--muted)}
+.team .flip:hover .face.front{border-color:var(--rasp)}
+.mono-a{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:2.8rem;transition:transform .6s var(--ease)}
+.mono-a.r{background:var(--rasp);color:var(--on-rasp)}
+.mono-a.m{background:var(--mint);color:#0E0C10}
+.flip:hover .mono-a{transform:rotate(-10deg) scale(1.06)}
+.team .turn{color:var(--rasp)}
+.together{margin-top:18px;border-radius:24px;background:var(--band);color:var(--band-fg);padding:clamp(26px,4vw,48px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:24px;align-items:center;overflow:hidden;position:relative}
+@media(max-width:760px){.together{grid-template-columns:minmax(0,1fr)}}
+.together h3{font-size:clamp(1.7rem,3.2vw,2.5rem)}
+.together em{color:var(--mint)}
+.together p{color:var(--band-muted);max-width:56ch;margin-top:12px}
+.balance{display:grid;gap:12px}
+.balance label{display:grid;gap:6px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted)}
+.balance input[type=range]{width:100%;accent-color:var(--rasp)}
+.verdict{font-weight:700;font-size:.95rem;padding:12px 14px;border-radius:14px;background:var(--band-2);border:1px solid var(--band-line);transition:all .3s}
+.verdict.ok{color:#0E0C10;background:var(--mint);border-color:var(--mint)}
+.verdict.bad{color:var(--on-rasp);background:var(--rasp);border-color:var(--rasp)}
+
+/* za koga */
+.fit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,56px);align-items:start}
+@media(max-width:720px){.fit{grid-template-columns:minmax(0,1fr)}}
+.fit h3{margin-bottom:6px}
+.fit ul{list-style:none;margin:0;padding:0}
+.fit li{border-top:1px solid var(--line)}
+.fit .yes button{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:14px 0;transition:padding-left .3s var(--ease)}
+.fit .yes button:hover{padding-left:8px}
+.box{width:24px;height:24px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;transition:all .3s var(--ease)}
+.box svg{width:14px;height:14px}
+.box path{fill:none;stroke:#0E0C10;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s ease}
+.fit .yes button[aria-pressed="true"] .box{background:var(--mint);border-color:var(--mint);transform:scale(1.1)}
+.fit .yes button[aria-pressed="true"] .box path{stroke-dashoffset:0}
+.fit .no li{padding:14px 0 14px 38px;color:var(--muted);position:relative}
+.fit .no li::before{content:"";position:absolute;left:5px;top:50%;width:14px;height:2px;background:var(--muted)}
+.score{margin-top:18px;padding:18px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:grid;gap:12px}
+.meter{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rasp),var(--mint));border-radius:999px;transition:width .6s var(--ease)}
+.score .btn{justify-self:start}
+
+/* cene */
+.bill{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;position:relative;margin-bottom:22px}
+.bill button{position:relative;z-index:1;padding:9px 18px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--muted);transition:color .3s}
+.bill button[aria-pressed="true"]{color:var(--bg)}
+.bill .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--ink);transition:transform .5s var(--ease)}
+.bill.r .pill{transform:translateX(100%)}
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media(max-width:720px){.plans{grid-template-columns:minmax(0,1fr)}}
+.plan{border:1px solid var(--line);border-radius:24px;padding:clamp(24px,3.4vw,40px);display:grid;gap:18px;align-content:start;background:var(--surface);transition:transform .45s var(--ease),border-color .3s,box-shadow .4s;position:relative;overflow:hidden}
+.plan:hover{transform:translateY(-8px);border-color:var(--rasp);box-shadow:0 30px 60px -40px var(--rasp)}
+.plan.feat{background:var(--band);color:var(--band-fg);border-color:var(--band)}
+.plan.feat:hover{border-color:var(--mint);box-shadow:0 30px 60px -40px var(--mint)}
+.plan.feat .eyebrow,.plan.feat .per,.plan.feat li{color:var(--band-muted)}
+.badge{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;background:var(--mint);color:#0E0C10;padding:5px 10px;border-radius:999px}
+.price{font-family:var(--display);font-size:clamp(3rem,6vw,4.4rem);line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:.4em;color:var(--muted);font-family:var(--body)}
+.plan.feat .price small{color:var(--band-muted)}
+.per{font-size:.9rem;color:var(--muted)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:.94rem;color:var(--muted)}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--rasp)}
+.plan.feat li::before{background:var(--mint)}
+
+/* faq */
+.faq{max-width:840px}
+.faq>li{list-style:none;border-top:1px solid var(--line)}
+.faq{padding:0;margin:0}
+.faq>li:last-child{border-bottom:1px solid var(--line)}
+.faq button.row-b{width:100%;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:20px 0;font-family:var(--display);font-size:1.4rem;line-height:1.25;transition:color .25s,padding-left .35s var(--ease)}
+.faq button.row-b:hover{color:var(--rasp);padding-left:8px}
+.faq .more p{color:var(--muted);padding:0 0 22px;max-width:66ch;font-family:var(--body);font-size:1rem}
+.faq .plus{flex:none}
+
+/* forma */
+.contact-band{background:var(--band);color:var(--band-fg)}
+.contact-band .eyebrow,.contact-band .lead{color:var(--band-muted)}
+.contact-band em{color:var(--mint)}
+.contact{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media(max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+.contact-points{display:grid;gap:12px;margin-top:26px}
+.contact-points div{display:flex;gap:12px;align-items:center;color:var(--band-muted);font-size:.95rem}
+.contact-points i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:.75rem;background:var(--band-2);color:var(--mint);border:1px solid var(--band-line);flex:none}
+form,.done{display:grid;gap:16px;background:var(--surface);color:var(--ink);border-radius:24px;padding:clamp(20px,3vw,34px)}
+.frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media(max-width:560px){.frow{grid-template-columns:minmax(0,1fr)}}
+label{display:grid;gap:6px;font-size:.8rem;font-weight:700;letter-spacing:.02em}
+input,select,textarea{font:400 1rem var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rasp);box-shadow:0 0 0 4px var(--rasp-soft)}
+.goal{display:flex;flex-wrap:wrap;gap:8px}
+.goal button{font-size:.84rem;font-weight:700;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted);transition:all .25s var(--ease)}
+.goal button:hover{border-color:var(--ink);color:var(--ink)}
+.goal button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);transform:translateY(-2px)}
+.err{color:var(--rasp);font-size:.86rem;font-weight:700}
+.done{border:2px solid var(--mint);animation:up .6s ease both}
+.done pre{font-family:var(--mono);font-size:.82rem;white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:0;max-height:260px;overflow:auto}
+.done .cta-row{margin:0}
+.done em{color:var(--rasp)}
+
+footer{background:var(--band);color:var(--band-muted);padding-block:36px 52px;font-size:.84rem;border-top:1px solid var(--band-line)}
+footer .wrap{display:grid;gap:10px}
+footer .logo{color:var(--band-fg)}
+footer .logo span{color:var(--mint)}
+
+.totop{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:opacity .35s,transform .45s var(--ease)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--rasp)}
+.totop svg{position:absolute;inset:0;width:52px;height:52px;transform:rotate(-90deg)}
+.totop circle{fill:none;stroke:var(--mint);stroke-width:3;stroke-dasharray:151;stroke-dashoffset:calc(151 - 151*var(--sp,0))}
+.totop span{font-size:1.1rem;font-weight:800}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none}
+  .check path{stroke-dashoffset:0}
+}
+</style>
+
+<div class="progress" id="prog" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#vrh"><i class="ring" aria-hidden="true"></i>SVOJA <span>360</span></a>
+    <nav class="links" aria-label="Glavna navigacija">
+      <a href="#program">Program</a>
+      <a href="#kako">Kako radimo</a>
+      <a href="#tim">Ko te vodi</a>
+      <a href="#saradnja">Saradnja</a>
+      <a class="btn sm" href="#prijava">Prijavi se</a>
+    </nav>
+  </div>
+</header>
+
+<main id="vrh">
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow up" style="--i:0">Hibridni coaching · snaga · kondicija · ishrana</span>
+      <h1 id="h1">Telo koje prati nivo svega što si <em>izgradila.</em></h1>
+      <p class="lead up" style="--i:3">U biznisu imaš sistem. SVOJA 360 ti daje isti takav sistem za telo: plan snage i kondicije, ishranu sa svrhom i napredak koji vidiš u brojkama. Vode te dva stručnjaka, po jednom planu.</p>
+      <div class="cta-row up" style="--i:4">
+        <a class="btn" href="#prijava">Prijavi se za razgovor <span class="arr">→</span></a>
+        <a class="btn ghost" href="#program">Pogledaj program</a>
+      </div>
+      <div class="chips up" style="--i:5">
+        <a class="chip" href="#program">Prvi zgib</a><a class="chip" href="#program">Polumaraton</a><a class="chip" href="#program">HYROX</a><a class="chip" href="#program">Insulinska</a><a class="chip" href="#program">Bolji san</a>
+      </div>
+    </div>
+
+    <aside class="board" aria-label="Primer boarda napretka">
+      <div class="board-top"><b>Tvoj board</b><span class="tag">Primer · 12 nedelja</span></div>
+      <div class="tabs" role="tablist" aria-label="Oblast napretka">
+        <i class="pill" aria-hidden="true"></i>
+        <button role="tab" aria-selected="true" data-tab="0" id="t0">Snaga</button>
+        <button role="tab" aria-selected="false" data-tab="1" id="t1">Kondicija</button>
+        <button role="tab" aria-selected="false" data-tab="2" id="t2">Energija</button>
+      </div>
+      <svg class="chart" id="chart" viewBox="0 0 340 170" role="img" aria-label="Primer grafika napretka kroz 12 nedelja">
+        <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--rasp)" stop-opacity=".35"/><stop offset="1" stop-color="var(--rasp)" stop-opacity="0"/></linearGradient></defs>
+        <line class="grid" x1="20" y1="30" x2="330" y2="30"/><line class="grid" x1="20" y1="80" x2="330" y2="80"/><line class="grid" x1="20" y1="130" x2="330" y2="130"/>
+        <path class="area" id="area" d=""/>
+        <path class="ln" id="line" d=""/>
+        <line class="vline" id="vl" x1="0" y1="20" x2="0" y2="145"/>
+        <circle class="hov" id="hv" r="4" cx="0" cy="0"/>
+        <circle class="dot" id="dot" r="6" cx="320" cy="40"/>
+        <text class="tip" id="tip" x="0" y="14">Nedelja 1</text>
+        <text x="20" y="162">Nedelja 1</text><text x="150" y="162">Nedelja 6</text><text x="276" y="162">Nedelja 12</text>
+      </svg>
+      <div class="metrics" id="metrics"></div>
+    </aside>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="track" aria-label="Naše poruke">
+    <a href="#program">Ono što ne meriš, ne možeš ni da ostvariš</a><a href="#kako">Ne fali ti disciplina. Fali ti plan</a><a href="#program">Ići u teretanu i trenirati nije isto</a><a href="#tim">Ishrana i trening iz dve glave, a jedan plan</a><a href="#prijava">Cilj bez plana je samo želja</a>
+    <a href="#program" aria-hidden="true" tabindex="-1">Ono što ne meriš, ne možeš ni da ostvariš</a><a href="#kako" aria-hidden="true" tabindex="-1">Ne fali ti disciplina. Fali ti plan</a><a href="#program" aria-hidden="true" tabindex="-1">Ići u teretanu i trenirati nije isto</a><a href="#tim" aria-hidden="true" tabindex="-1">Ishrana i trening iz dve glave, a jedan plan</a><a href="#prijava" aria-hidden="true" tabindex="-1">Cilj bez plana je samo želja</a>
+  </div>
+</div>
+
+<section id="protiv" class="dark" style="padding-top:clamp(48px,7vw,90px)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Protiv čega smo</span>
+      <h2>Treniraš više od većine. A i dalje <em>tapkaš u mestu.</em></h2>
+      <p class="lead">Ne zato što ti fali volje. Nego zato što radiš bez plana, bez cilja na papiru i bez brojki koje bi ti rekle da li ideš napred.</p>
+    </div>
+    <div class="versus">
+      <button class="flip reveal" aria-pressed="false" style="--d:0">
+        <div class="flip-in">
+          <div class="face front">
+            <span class="eyebrow">Protivnik broj 1</span>
+            <h3><s>Pomirenost</s></h3>
+            <p>Ona tiha rečenica „to je tako“ posle koje žena pusti sebe i prestane da raste. U biznisu je nikad ne bi prihvatila.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Klikni: šta radimo umesto toga</span>
+          </div>
+          <div class="face back">
+            <span class="eyebrow">Umesto toga</span>
+            <h3>Cilj na papiru</h3>
+            <p>Postavljamo cilj sa brojem i datumom: „prvi zgib do marta“ ili „10 km ispod 55 minuta“. Pa ga merimo, na početku, u sredini i na kraju.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Vrati</span>
+          </div>
+        </div>
+      </button>
+      <button class="flip reveal" aria-pressed="false" style="--d:1">
+        <div class="flip-in">
+          <div class="face front">
+            <span class="eyebrow">Protivnik broj 2</span>
+            <h3><s>Improvizacija</s></h3>
+            <p>Trening po osećaju, suplementi iz reklame i godine rada bez pravca. Isti trening, ista kilaža, isti tempo, iz meseca u mesec.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Klikni: šta radimo umesto toga</span>
+          </div>
+          <div class="face back">
+            <span class="eyebrow">Umesto toga</span>
+            <h3>Sistem</h3>
+            <p>Plan u blokovima sa jasnom progresijom, ishrana koja prati trening i nedeljni check-in. Svaka promena u planu ima razlog i brojku iza sebe.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Vrati</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="rezultati">
+  <div class="wrap results">
+    <div class="head reveal" style="margin:0">
+      <span class="eyebrow">Šta se menja za 3 meseca</span>
+      <h2>Jača, izdržljivija i sa <em>jasnim planom.</em></h2>
+      <p class="lead">Na početku pravimo tvoj board: gde si sada, gde želiš da budeš i tačan put do tamo. Na kraju ponovo merimo, pa napredak vidiš crno na belo.</p>
+      <span class="tap">Klikni na stavku da vidiš kako merimo</span>
+    </div>
+    <div>
+      <ul class="acc" id="acc-r">
+        <li class="reveal"><button class="row-b" aria-expanded="false"><span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>Jača si, i to vidiš u brojkama</b><small>Testovi snage i kondicije na početku i na kraju bloka.</small></span><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p><span class="eyebrow">Kako merimo</span>Mrtvo dizanje, čučanj, zgib ili sklek, na početku, u 6. i u 12. nedelji.</p></div></div></li>
+        <li class="reveal"><button class="row-b" aria-expanded="false"><span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>Imaš energiju za ceo dan</b><small>Za posao, porodicu i trening, bez oslanjanja na kafu i šećer.</small></span><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p><span class="eyebrow">Kako merimo</span>Energija od 1 do 10 u nedeljnom check-inu, plus san i puls u mirovanju sa sata.</p></div></div></li>
+        <li class="reveal"><button class="row-b" aria-expanded="false"><span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>Čvršće telo i bolje držanje</b><small>Više mišića i oblik koji dolazi od treninga, a ne od gladovanja.</small></span><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p><span class="eyebrow">Kako merimo</span>Obimi struka, kukova i butina na dve nedelje i slike u istim uslovima.</p></div></div></li>
+        <li class="reveal"><button class="row-b" aria-expanded="false"><span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>Treniraš pametnije, bez stalnih pauza</b><small>Plan uzima u obzir tvoje bolove i povrede, uz fizioterapeuta kad je potrebno.</small></span><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p><span class="eyebrow">Kako merimo</span>Broj odrađenih treninga i bol od 0 do 10 posle treninga, iz nedelje u nedelju.</p></div></div></li>
+        <li class="reveal"><button class="row-b" aria-expanded="false"><span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>Znaš šta radiš i zašto</b><small>Šta jedeš, kako treniraš i šta ti brojke sa sata zaista govore.</small></span><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p><span class="eyebrow">Kako merimo</span>Na kraju bloka sama složiš svoju nedelju treninga i dan na tanjiru, a mi proverimo.</p></div></div></li>
+      </ul>
+      <p class="note">Rezultati zavise od početnog stanja i doslednosti. Ne obećavamo kilograme, nego rad na zdravlju, snazi i kondiciji.</p>
+    </div>
+  </div>
+</section>
+
+<section id="program" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Program</span>
+      <h2>Četiri oblasti. <em>Jedan sistem.</em></h2>
+      <p class="lead">Snaga, kondicija i ishrana ne rade odvojeno. Zato ih slažemo u jedan plan koji prati tvoje telo, tvoj kalendar i tvoj cilj.</p>
+      <span class="tap">Otvori karticu za primer cilja</span>
+    </div>
+    <div class="quad">
+      <button class="q reveal" aria-expanded="false" style="--d:0">
+        <span class="ico"><svg viewBox="0 0 44 44"><rect class="bar" x="7" y="25" width="7" height="12" rx="1.5"/><rect class="bar" x="18.5" y="17" width="7" height="20" rx="1.5"/><rect class="bar" x="30" y="8" width="7" height="29" rx="1.5"/></svg></span>
+        <h3>Snaga</h3>
+        <p>Trening snage sa jasnom progresijom, da svakog meseca dižeš više. Mišići i kosti koje gradiš sada su tvoja najbolja investicija.</p>
+        <ul class="tags"><li>Prvi zgib</li><li>Progresija</li><li>Tehnika</li><li>Kosti i mišići</li></ul>
+        <span class="more"><span><span class="detail"><span><span>Primer cilja</span>Prvi zgib za 12 nedelja</span><span><span>Šta merimo</span>Kilaže, ponavljanja i procenjeni maksimum</span><span><span>Nedeljno</span>2–3 treninga snage</span></span></span></span>
+      </button>
+      <button class="q m reveal" aria-expanded="false" style="--d:1">
+        <span class="ico"><svg viewBox="0 0 44 44"><path class="pulse" d="M3 24h9l4-12 6 22 5-16 3 6h11"/></svg></span>
+        <h3>Kondicija za dug život</h3>
+        <p>Srce, pluća i izdržljivost kroz pametno dozirano trčanje ili kondiciju po tvom izboru. Bez povreda i bez stalnih pauza.</p>
+        <ul class="tags"><li>Polumaraton</li><li>HYROX</li><li>Tempo i puls</li><li>Bicikl · hod · plivanje</li></ul>
+        <span class="more"><span><span class="detail"><span><span>Primer cilja</span>10 km ispod 55 minuta</span><span><span>Šta merimo</span>Tempo, puls u mirovanju i oporavak pulsa</span><span><span>Nedeljno</span>2–3 kondiciona treninga</span></span></span></span>
+      </button>
+      <button class="q m reveal" aria-expanded="false" style="--d:0">
+        <span class="ico"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><path class="spin" d="M22 8a14 14 0 0 1 14 14"/><circle cx="22" cy="22" r="3.5"/></svg></span>
+        <h3>Ishrana i hormoni</h3>
+        <p>Šta, koliko i kada da jedeš za svoj trening, ciklus i hormonske promene. Uz samo one suplemente koji ti zaista trebaju.</p>
+        <ul class="tags"><li>Protein</li><li>Insulinska</li><li>Ciklus</li><li>San i energija</li></ul>
+        <span class="more"><span><span class="detail"><span><span>Primer cilja</span>Energija 8/10 bez popodnevnog pada</span><span><span>Šta merimo</span>Protein, energija, san i ciklus</span><span><span>Uz to</span>Nalazi kod tvog lekara</span></span></span></span>
+      </button>
+      <button class="q reveal" aria-expanded="false" style="--d:1">
+        <span class="ico"><svg viewBox="0 0 44 44"><rect x="7" y="7" width="30" height="30" rx="4"/><path class="pulse" d="M12 30l7-8 6 4 8-11"/></svg></span>
+        <h3>Plan i napredak</h3>
+        <p>Cilj na papiru, struktura nedelje, testovi i podaci sa tvog sata i prstena. Ono što ne meriš, ne možeš ni da ostvariš.</p>
+        <ul class="tags"><li>Board</li><li>Testovi</li><li>Check-in</li><li>Podaci sa sata</li></ul>
+        <span class="more"><span><span class="detail"><span><span>Primer cilja</span>Board sa ciljem i datumom</span><span><span>Šta merimo</span>Trend kroz nedelje, ne jedan dan</span><span><span>Ritam</span>Test na svakih 6 nedelja</span></span></span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="kako" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Kako radimo</span>
+      <h2>Od analize do <em>merljivog rezultata.</em></h2>
+      <span class="tap">Klikni na fazu</span>
+    </div>
+    <div class="how">
+      <div class="steps reveal" id="steps">
+        <i class="fill" aria-hidden="true"></i>
+        <button class="step cur" aria-expanded="true"><span class="eyebrow">Početak</span><b>Analiza i tvoj board</b><span class="more"><span><p>Trening, bolovi i povrede, ciklus, nalazi i podaci sa sata. Radimo početne testove i stavljamo cilj na papir.</p></span></span></button>
+        <button class="step" aria-expanded="false"><span class="eyebrow">Nedelje 1–4</span><b>Temelj</b><span class="more"><span><p>Tehnika, struktura nedelje i ishrana koja prati trening. Prve promene osetiš u energiji i oporavku.</p></span></span></button>
+        <button class="step" aria-expanded="false"><span class="eyebrow">Nedelje 5–8</span><b>Izgradnja</b><span class="more"><span><p>Progresivno opterećenje u snazi i kondiciji. Fino podešavamo ishranu prema treningu i tvom rasporedu. Test u 6. nedelji.</p></span></span></button>
+        <button class="step" aria-expanded="false"><span class="eyebrow">Nedelje 9–12</span><b>Performans i test</b><span class="more"><span><p>Priprema za cilj, ponovni testovi i pregled napretka u brojkama. Dogovaramo sledeći cilj.</p></span></span></button>
+      </div>
+      <div class="inc-box reveal" style="--d:1">
+        <div class="inc-head"><b>Šta dobijaš</b><span class="tap">Klikni za „zašto“</span></div>
+        <ul class="inc">
+          <li><button class="row-b" aria-expanded="false"><b>Detaljna analiza i tvoj board</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Cilj na papiru i plan kako do njega, od prvog dana. <span class="why">Bez početne tačke ne vidiš napredak.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Plan treninga 3–4 puta nedeljno</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Snaga i kondicija u jednom sistemu, sa jasnom progresijom. <span class="why">Ista vežba mesecima ne daje telu razlog da se menja.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Ishrana sa svrhom</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Šta, koliko i kada, plus samo suplementi koji ti zaista trebaju. <span class="why">Trening bez dovoljno hrane koči snagu i oporavak.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Rad na bolu kroz pametan trening</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Uz fizioterapeuta ili lekara kad je to potrebno. <span class="why">Pauza retko sama reši bol, a pametno opterećenje često pomogne.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Nedeljni check-in</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Snaga, kondicija, obimi, san, energija i podaci sa sata. Feedback dobijaš od obe. <span class="why">Ono što ne meriš, ne možeš ni da ostvariš.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Plan koji preživi tvoj kalendar</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Putovanja, poslovni ručkovi i guste nedelje su predviđeni. <span class="why">Plan koji ne preživi utorak nije plan.</span></p></div></div></li>
+          <li><button class="row-b" aria-expanded="false"><b>Direktna podrška</b><span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Pišeš nam kad god ti treba, a odgovaramo u roku od 24h. <span class="why">Pitanje rešeno danas ne postaje izgovor sutra.</span></p></div></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tim" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Ko te vodi</span>
+      <h2>Dva stručnjaka. <em>Jedan plan.</em></h2>
+      <p class="lead">Trener kaže „treniraj više“, nutricionista kaže „jedi manje“. Kod nas se ta dva saveta prvo usklade, pa tek onda stignu do tebe.</p>
+    </div>
+    <div class="team">
+      <button class="flip reveal" aria-pressed="false" style="--d:0">
+        <div class="flip-in">
+          <div class="face front">
+            <div class="mono-a r" aria-hidden="true">N</div>
+            <div><span class="eyebrow">Ishrana · hormoni · navike</span><h3>Natalija</h3></div>
+            <p>Vodi tvoju ishranu, hormone i navike, da telo ima dovoljno energije za trening, oporavak i ceo tvoj dan.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Klikni: šta radi za tebe</span>
+          </div>
+          <div class="face back">
+            <span class="eyebrow" style="color:var(--mint)">Natalija za tebe</span>
+            <ul><li>Ishrana za tvoj trening i opterećenje</li><li>Insulinska, ciklus i štitna, uz tvog lekara</li><li>San, stres, energija i suplementi</li><li>Plan za restorane, putovanja i guste nedelje</li></ul>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Vrati</span>
+          </div>
+        </div>
+      </button>
+      <button class="flip reveal" aria-pressed="false" style="--d:1">
+        <div class="flip-in">
+          <div class="face front">
+            <div class="mono-a m" aria-hidden="true">A</div>
+            <div><span class="eyebrow">Snaga · kondicija · podaci</span><h3>Anđela</h3></div>
+            <p>Vodi tvoj trening snage i kondicije i prati napredak kroz testove i podatke, da tačno vidiš gde si i kuda ideš.</p>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Klikni: šta radi za tebe</span>
+          </div>
+          <div class="face back">
+            <span class="eyebrow" style="color:var(--mint)">Anđela za tebe</span>
+            <ul><li>Plan snage i trčanja u blokovima</li><li>Testovi, tehnika i priprema za trku</li><li>Tvoj board i tumačenje podataka sa sata</li><li>Progresija koja prati tvoj oporavak</li></ul>
+            <span class="turn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4M12 1v3h-3M4 15v-3h3"/></svg>Vrati</span>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="together reveal">
+      <div>
+        <span class="eyebrow" style="color:var(--band-muted)">Zašto zajedno</span>
+        <h3>Ne možeš da treniraš kao sportista, a da jedeš kao da si <em>na dijeti.</em></h3>
+        <p>Previše treninga uz premalo hrane koči napredak i remeti san, ciklus i imunitet. Zato obim treninga i ishranu usklađujemo zajedno, iz nedelje u nedelju.</p>
+      </div>
+      <div class="balance">
+        <label for="r-tr">Treninga nedeljno: <span id="v-tr">4</span><input type="range" id="r-tr" min="1" max="7" value="4"></label>
+        <label for="r-hr">Hrana u odnosu na potrebe: <span id="v-hr">premalo</span><input type="range" id="r-hr" min="1" max="3" value="1"></label>
+        <div class="verdict" id="verdict" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zakoga" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Za koga je</span>
+      <h2>Za ženu koja hoće isti standard <em>i za svoje telo.</em></h2>
+    </div>
+    <div class="fit">
+      <div class="yes reveal">
+        <h3>Ovo je za tebe ako</h3>
+        <p class="hint" style="margin-bottom:10px">Označi u čemu se prepoznaješ.</p>
+        <ul>
+          <li><button aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3L13 4.5"/></svg></span>Odbijaš da „to je tako“ bude tvoja priča</button></li>
+          <li><button aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3L13 4.5"/></svg></span>Već treniraš i jedeš zdravo, ali bez plana i cilja</button></li>
+          <li><button aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3L13 4.5"/></svg></span>Preuzimaš odgovornost i držiš reč datu sebi</button></li>
+          <li><button aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3L13 4.5"/></svg></span>Poštuješ stručnost i puštaš da te neko vodi kad zna više</button></li>
+          <li><button aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3L13 4.5"/></svg></span>Želiš da iz godine u godinu budeš jača</button></li>
+        </ul>
+        <div class="score">
+          <div class="meter"><i id="meter"></i></div>
+          <p id="score-t" aria-live="polite">Prepoznaješ se u 0 od 5.</p>
+          <a class="btn" href="#prijava" id="score-b" hidden>Hajde da razgovaramo <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="no reveal" style="--d:1">
+        <h3>Ovo nije za tebe ako</h3>
+        <p class="hint" style="margin-bottom:10px">I to je u redu.</p>
+        <ul>
+          <li>Tražiš čarobno rešenje i brze kilograme</li>
+          <li>Uvek imaš razlog zašto sad nije trenutak</li>
+          <li>Treniraš zbog story-ja, a ne zbog sebe</li>
+          <li>Ne želiš da pratiš trening i ishranu</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="saradnja" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Saradnja</span>
+      <h2>Izaberi svoj <em>ritam.</em></h2>
+    </div>
+    <div class="bill reveal" id="bill" role="group" aria-label="Način plaćanja">
+      <i class="pill" aria-hidden="true"></i>
+      <button aria-pressed="true" data-bill="one">Jednokratno</button>
+      <button aria-pressed="false" data-bill="two">U 2 rate</button>
+    </div>
+    <div class="plans">
+      <article class="plan reveal" style="--d:0">
+        <span class="eyebrow">3 meseca · jedan blok</span>
+        <div><div class="price"><span class="pv" data-one="450" data-two="225">450</span> € <small class="pr" data-two="× 2 rate"></small></div><div class="per" data-one="jednokratno, ili 2 rate po 225 €" data-two="dve rate, ukupno 450 €">jednokratno, ili 2 rate po 225 €</div></div>
+        <ul><li>Analiza, testovi i tvoj board</li><li>Plan snage i kondicije</li><li>Ishrana i suplementi</li><li>Nedeljni check-in i podrška</li></ul>
+        <a class="btn" href="#prijava" data-plan="3 meseca">Prijavi se <span class="arr">→</span></a>
+      </article>
+      <article class="plan feat reveal" style="--d:1">
+        <span class="badge">Najbolji rezultat</span>
+        <span class="eyebrow">6 meseci · dva bloka</span>
+        <div><div class="price"><span class="pv" data-one="750" data-two="375">750</span> € <small class="pr" data-two="× 2 rate"></small></div><div class="per" data-one="jednokratno, ili 2 rate po 375 €" data-two="dve rate, ukupno 750 €">jednokratno, ili 2 rate po 375 €</div></div>
+        <ul><li>Sve iz programa od 3 meseca</li><li>Drugi blok sa ciljem: trka, HYROX ili sledeći nivo snage</li><li>Plan koji se sve više prilagođava tebi</li><li>Ponovni testovi na svakih 6 nedelja</li></ul>
+        <a class="btn mint" href="#prijava" data-plan="6 meseci">Prijavi se <span class="arr">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="pitanja" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Česta pitanja</span>
+      <h2>Pre nego što se <em>javiš.</em></h2>
+    </div>
+    <ul class="faq reveal" id="faq">
+      <li><button class="row-b" aria-expanded="false">Imam insulinsku, Hašimoto ili neredovan ciklus. Da li je program za mene?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Da. Plan je prilagođen tvom stanju i radi uz tvog lekara, a ne umesto njega. Terapiju i dijagnostiku vodi isključivo lekar, a mi radimo na treningu, ishrani i navikama.</p></div></div></li>
+      <li><button class="row-b" aria-expanded="false">Moram li da trčim?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Ne. Kondicija je deo programa, ali formu biraš ti: trčanje, brzo hodanje i planinarenje, bicikl, veslanje ili plivanje.</p></div></div></li>
+      <li><button class="row-b" aria-expanded="false">Koliko vremena mi treba nedeljno?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Tri do četiri treninga nedeljno i nekoliko minuta dnevno za praćenje ishrane. Za guste nedelje i putovanja imaš plan B.</p></div></div></li>
+      <li><button class="row-b" aria-expanded="false">Kako izgleda nedeljni check-in?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Jednom nedeljno šalješ kratak pregled: trening, obimi, san, energija i podaci sa sata. Feedback dobijaš i za trening i za ishranu, a plan se prilagođava.</p></div></div></li>
+      <li><button class="row-b" aria-expanded="false">Da li je saradnja online?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>Da. Plan, praćenje i komunikacija su online, pa možeš da treniraš u svojoj teretani, kod kuće ili na putovanju.</p></div></div></li>
+      <li><button class="row-b" aria-expanded="false">Šta ako me nešto boli ili imam staru povredu?<span class="plus" aria-hidden="true">+</span></button><div class="more"><div><p>To je deo plana od prvog dana. Trening prilagođavamo, a kad je potrebno, uključujemo tvog fizioterapeuta ili lekara.</p></div></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="prijava" class="contact-band">
+  <div class="wrap contact">
+    <div class="head reveal" style="margin:0">
+      <span class="eyebrow">Prijava</span>
+      <h2>Hajde da tvoj cilj stavimo <em>na papir.</em></h2>
+      <p class="lead">Popuni prijavu, a mi ti se javljamo sa terminom za razgovor. Na razgovoru dobijaš procenu i predlog plana za svoj slučaj.</p>
+      <div class="contact-points">
+        <div><i>1</i>Popuniš prijavu za 2 minuta</div>
+        <div><i>2</i>Javimo ti se u roku od 24h</div>
+        <div><i>3</i>Na razgovoru dobiješ plan za svoj slučaj</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form id="forma" novalidate>
+        <div class="frow">
+          <label for="f-ime">Ime i prezime<input id="f-ime" name="ime" autocomplete="name" required></label>
+          <label for="f-kontakt">Email ili Instagram<input id="f-kontakt" name="kontakt" placeholder="ime@email.com ili @profil" required></label>
+        </div>
+        <div class="frow">
+          <label for="f-grad">Grad<input id="f-grad" name="grad" autocomplete="address-level2"></label>
+          <label for="f-paket">Paket
+            <select id="f-paket" name="paket"><option>Nisam sigurna</option><option>3 meseca</option><option>6 meseci</option></select>
+          </label>
+        </div>
+        <label for="f-trening">Koliko trenutno treniraš?
+          <select id="f-trening" name="trening"><option>3–4 puta nedeljno</option><option>1–2 puta nedeljno</option><option>5 i više puta nedeljno</option><option>Trenutno ne treniram</option></select>
+        </label>
+        <div style="display:grid;gap:8px">
+          <span style="font-size:.8rem;font-weight:700">Glavni cilj (možeš više)</span>
+          <div class="goal" id="goal" role="group" aria-label="Glavni cilj">
+            <button type="button" aria-pressed="false">Snaga i prvi zgib</button>
+            <button type="button" aria-pressed="false">Trka ili HYROX</button>
+            <button type="button" aria-pressed="false">Zdravlje i hormoni</button>
+            <button type="button" aria-pressed="false">Energija i san</button>
+            <button type="button" aria-pressed="false">Oblik tela</button>
+          </div>
+        </div>
+        <label for="f-poruka">Šta bi volela da znamo? (cilj, bolovi, dijagnoza, raspored)<textarea id="f-poruka" name="poruka"></textarea></label>
+        <p class="err" id="greska" hidden></p>
+        <div><button class="btn" type="submit">Pripremi prijavu <span class="arr">→</span></button></div>
+        <p class="hint">Podatke koje uneseš vidiš samo ti, dok ih ne pošalješ nama.</p>
+      </form>
+      <div class="done" id="gotovo" hidden>
+        <span class="eyebrow">Prijava je spremna</span>
+        <h3>Još jedan korak: <em>pošalji nam je.</em></h3>
+        <p class="hint">Kopiraj poruku i pošalji je Nataliji ili Anđeli u DM. Javljamo ti se u roku od 24h.</p>
+        <pre id="tekst" tabindex="0"></pre>
+        <div class="cta-row">
+          <button class="btn" type="button" id="kopiraj">Kopiraj poruku</button>
+          <button class="btn ghost" type="button" id="izmeni">Izmeni prijavu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#vrh">SVOJA <span>360</span></a>
+    <p>Natalija i Anđela · hibridni coaching: snaga, kondicija i ishrana.</p>
+    <p>Program je dopuna, a ne zamena za medicinsku terapiju. Dijagnozu i terapiju vodi tvoj lekar.</p>
+  </div>
+</footer>
+
+<a class="totop" id="totop" href="#vrh" aria-label="Na vrh stranice"><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/></svg><span aria-hidden="true">↑</span></a>
+
+<script>
+(function(){
+  var root=document.documentElement; root.classList.add('js');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&window.matchMedia('(pointer: fine)').matches;
+  var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+
+  // naslov reč po reč
+  var h1=$('#h1');
+  if(h1 && !reduce){
+    var w=0;
+    [].slice.call(h1.childNodes).forEach(function(n){
+      if(n.nodeType===3){var f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(function(p){if(!p)return; if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return;} var s=document.createElement('span');s.className='word';s.style.setProperty('--w',w++);s.textContent=p;f.appendChild(s);});h1.replaceChild(f,n);}
+      else {n.classList.add('word');n.style.setProperty('--w',w++);}
+    });
+  }
+
+  // reveal
+  var els=$$('.reveal');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){io.observe(el);});
+  } else els.forEach(function(el){el.classList.add('in');});
+
+  // ripple i magnetna dugmad
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.btn'); if(!b||reduce)return;
+    var r=b.getBoundingClientRect(), s=Math.max(r.width,r.height)*2.2, sp=document.createElement('span');
+    sp.className='ripple'; sp.style.width=sp.style.height=s+'px'; sp.style.left=(e.clientX-r.left-s/2)+'px'; sp.style.top=(e.clientY-r.top-s/2)+'px';
+    b.appendChild(sp); setTimeout(function(){sp.remove();},700);
+  });
+  if(fine && !reduce){
+    $$('.btn').forEach(function(b){
+      b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.28-2)+'px)';});
+      b.addEventListener('mouseleave',function(){b.style.transform='';});
+    });
+    // nagib kartica
+    $$('.q,.plan').forEach(function(c){
+      c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*6)+'deg) translateY(-6px)';});
+      c.addEventListener('mouseleave',function(){c.style.transform='';});
+    });
+  }
+
+  // board
+  var sets=[
+    {pts:[.10,.13,.19,.24,.29,.35,.40,.47,.55,.62,.70,.82],unit:'snaga',m:[['Mrtvo dizanje','60','85 kg'],['Čučanj','45','65 kg'],['Zgibovi','0','3'],['Sklekovi sa poda','2','12']]},
+    {pts:[.12,.15,.18,.22,.27,.31,.37,.42,.48,.55,.61,.70],unit:'kondicija',m:[['10 km','62:00','55:30'],['Puls u mirovanju','68','61'],['Oporavak pulsa, 1 min','18','27'],['Lagano trčanje, tempo','7:10','6:35']]},
+    {pts:[.22,.30,.28,.38,.43,.50,.47,.57,.62,.67,.72,.79],unit:'energija',m:[['San, prosek','6,1 h','7,4 h'],['Energija, 1–10','5','8'],['HRV','38 ms','49 ms'],['Popodnevni pad','5 dana','1 dan']]}
+  ];
+  var line=$('#line'),area=$('#area'),dot=$('#dot'),mets=$('#metrics'),pill=$('.tabs .pill'),cur=0;
+  function xy(i,v){return [20+i*(300/11),140-v*115];}
+  function pathFor(p){var d='',i;for(i=0;i<p.length;i++){var a=xy(i,p[i]);if(i===0){d+='M'+a[0]+' '+a[1];}else{var b=xy(i-1,p[i-1]),cx=(a[0]+b[0])/2;d+=' C'+cx+' '+b[1]+' '+cx+' '+a[1]+' '+a[0]+' '+a[1];}}return d;}
+  function render(k,animate){
+    var s=sets[k], d=pathFor(s.pts), last=xy(11,s.pts[11]);
+    line.setAttribute('d',d); area.setAttribute('d',d+' L320 145 L20 145Z'); dot.setAttribute('cx',last[0]); dot.setAttribute('cy',last[1]);
+    if(animate && !reduce && line.getTotalLength){
+      var L=line.getTotalLength(); line.style.transition='none'; line.style.strokeDasharray=L; line.style.strokeDashoffset=L; line.getBoundingClientRect();
+      line.style.transition='stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)'; line.style.strokeDashoffset=0;
+      area.style.transition='none'; area.style.opacity=0; area.getBoundingClientRect(); area.style.transition='opacity 1s ease .8s'; area.style.opacity=1;
+      dot.style.transition='none'; dot.style.opacity=0; dot.getBoundingClientRect(); dot.style.transition='opacity .4s ease 1.4s'; dot.style.opacity=1;
+    }
+    var html=s.m.map(function(r){return '<div class="metric"><span>'+r[0]+'</span><b>'+r[1]+' → <i>'+r[2]+'</i></b></div>';}).join('');
+    if(animate && !reduce){mets.classList.add('swap');setTimeout(function(){mets.innerHTML=html;mets.getBoundingClientRect();mets.classList.remove('swap');},250);} else mets.innerHTML=html;
+  }
+  function selectTab(k){
+    cur=k; pill.style.transform='translateX(calc('+k+' * (100% + 6px)))';
+    $$('.tabs button').forEach(function(b,i){b.setAttribute('aria-selected',i===k?'true':'false');b.tabIndex=i===k?0:-1;});
+    render(k,true);
+  }
+  $$('.tabs button').forEach(function(b,i){
+    b.addEventListener('click',function(){selectTab(i);});
+    b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=(cur+(e.key==='ArrowRight'?1:2))%3;selectTab(n);$('#t'+n).focus();}});
+  });
+  render(0,true);
+  // automatsko listanje dok korisnik ne klikne
+  var auto=reduce?null:setInterval(function(){selectTab((cur+1)%3);},5200);
+  $$('.tabs button').forEach(function(b){b.addEventListener('click',function(){if(auto){clearInterval(auto);auto=null;}});});
+  // hover nad grafikom
+  var chart=$('#chart'),vl=$('#vl'),hv=$('#hv'),tip=$('#tip');
+  function hoverAt(clientX){
+    var r=chart.getBoundingClientRect(), x=(clientX-r.left)/r.width*340, i=Math.max(0,Math.min(11,Math.round((x-20)/(300/11)))), p=xy(i,sets[cur].pts[i]);
+    vl.setAttribute('x1',p[0]);vl.setAttribute('x2',p[0]);hv.setAttribute('cx',p[0]);hv.setAttribute('cy',p[1]);
+    tip.textContent='Nedelja '+(i+1); tip.setAttribute('x',Math.min(p[0]-22,282)); vl.style.opacity=hv.style.opacity=tip.style.opacity=1;
+  }
+  chart.addEventListener('mousemove',function(e){hoverAt(e.clientX);});
+  chart.addEventListener('click',function(e){hoverAt(e.clientX);});
+  chart.addEventListener('mouseleave',function(){vl.style.opacity=hv.style.opacity=tip.style.opacity=0;});
+
+  // flip kartice
+  $$('.flip').forEach(function(f){f.addEventListener('click',function(){var on=!f.classList.contains('on');f.classList.toggle('on',on);f.setAttribute('aria-pressed',on?'true':'false');});});
+
+  // harmonike
+  function acc(sel){$$(sel+' > li > button.row-b').forEach(function(b){b.addEventListener('click',function(){var li=b.parentNode,o=!li.classList.contains('open');li.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');});});}
+  acc('#acc-r'); acc('.inc'); acc('#faq');
+
+  // kvadrati
+  $$('.q').forEach(function(q){q.addEventListener('click',function(){var o=q.getAttribute('aria-expanded')!=='true';q.setAttribute('aria-expanded',o?'true':'false');q.classList.toggle('open',o);});});
+
+  // faze
+  var stepsEl=$('#steps'),stepBtns=$$('.step');
+  function setStep(k){stepBtns.forEach(function(s,i){s.classList.toggle('cur',i===k);s.classList.toggle('done',i<k);s.setAttribute('aria-expanded',i===k?'true':'false');});stepsEl.style.setProperty('--p',(k/(stepBtns.length-1)).toFixed(3));}
+  stepBtns.forEach(function(s,i){s.addEventListener('click',function(){setStep(i);});});
+  setStep(0);
+
+  // balans trening / hrana
+  var rt=$('#r-tr'),rh=$('#r-hr'),vt=$('#v-tr'),vh=$('#v-hr'),ver=$('#verdict');
+  function bal(){
+    var t=+rt.value,h=+rh.value; vt.textContent=t; vh.textContent=['premalo','taman','previše'][h-1];
+    var msg,cls;
+    if(h===1&&t>=4){msg='Puno treninga uz premalo hrane: pada snaga, a ciklus i san trpe.';cls='bad';}
+    else if(h===1){msg='Premalo hrane: oporavak je sporiji, a napredak stoji.';cls='bad';}
+    else if(h===3&&t<=2){msg='Više hrane nego što trening traži. Treba ih uskladiti.';cls='';}
+    else if(t>=6){msg='Dosta treninga. Plan mora da ima i lakše dane za oporavak.';cls='';}
+    else {msg='Dobar balans. Ovo je zona u kojoj napreduješ.';cls='ok';}
+    ver.textContent=msg; ver.className='verdict'+(cls?' '+cls:'');
+  }
+  rt.addEventListener('input',bal); rh.addEventListener('input',bal); bal();
+
+  // za koga
+  var yes=$$('.fit .yes button'),meter=$('#meter'),st=$('#score-t'),sb=$('#score-b');
+  yes.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');
+    var n=yes.filter(function(x){return x.getAttribute('aria-pressed')==='true';}).length;
+    meter.style.width=(n/yes.length*100)+'%';
+    st.textContent=n>=3?'Prepoznaješ se u '+n+' od 5. Ovaj program je pravljen baš za tebe.':'Prepoznaješ se u '+n+' od 5.';
+    sb.hidden=n<3;
+  });});
+
+  // cene
+  var bill=$('#bill'),mode='one';
+  function animNum(el,to){var from=+el.textContent||0,t0=null;if(reduce){el.textContent=to;return;}function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/600);k=1-Math.pow(1-k,3);el.textContent=Math.round(from+(to-from)*k);if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+  $$('#bill button').forEach(function(b){b.addEventListener('click',function(){
+    mode=b.getAttribute('data-bill'); bill.classList.toggle('r',mode==='two');
+    $$('#bill button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    $$('.pv').forEach(function(p){animNum(p,+p.getAttribute('data-'+mode));});
+    $$('.pr').forEach(function(p){p.textContent=mode==='two'?p.getAttribute('data-two'):'';});
+    $$('.per').forEach(function(p){p.textContent=p.getAttribute('data-'+mode);});
+  });});
+
+  // izbor paketa iz kartice
+  $$('[data-plan]').forEach(function(a){a.addEventListener('click',function(){var s=$('#f-paket');if(s)s.value=a.getAttribute('data-plan');});});
+
+  // ciljevi u formi
+  $$('#goal button').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});});
+
+  // forma
+  var f=$('#forma'),done=$('#gotovo'),out=$('#tekst'),err=$('#greska');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){return document.getElementById(id).value.trim();};
+    if(!v('f-ime')||!v('f-kontakt')){err.textContent='Upiši ime i kontakt, da znamo kome da se javimo.';err.hidden=false;document.getElementById(!v('f-ime')?'f-ime':'f-kontakt').focus();return;}
+    err.hidden=true;
+    var goals=$$('#goal button').filter(function(b){return b.getAttribute('aria-pressed')==='true';}).map(function(b){return b.textContent;});
+    var lines=['Prijava za SVOJA 360','','Ime: '+v('f-ime'),'Kontakt: '+v('f-kontakt')];
+    if(v('f-grad'))lines.push('Grad: '+v('f-grad'));
+    lines.push('Paket: '+v('f-paket'),'Trening: '+v('f-trening'),'Cilj: '+(goals.length?goals.join(', '):'nisam izabrala'));
+    if(v('f-poruka'))lines.push('','Poruka: '+v('f-poruka'));
+    out.textContent=lines.join('\n');
+    f.hidden=true; done.hidden=false; done.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  });
+  $('#izmeni').addEventListener('click',function(){done.hidden=true;f.hidden=false;});
+  var kb=$('#kopiraj');
+  kb.addEventListener('click',function(){
+    function sel(){var r=document.createRange();r.selectNodeContents(out);var s=window.getSelection();s.removeAllRanges();s.addRange(r);kb.textContent='Označeno, kopiraj ručno';}
+    try{navigator.clipboard.writeText(out.textContent).then(function(){kb.textContent='Kopirano';setTimeout(function(){kb.textContent='Kopiraj poruku';},2200);},sel);}catch(x){sel();}
+  });
+
+  // skrol: traka napretka, nav, dugme na vrh, aktivni link
+  var nav=$('#nav'),prog=$('#prog'),top=$('#totop'),links=$$('.links a:not(.btn)'),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight, p=h>0?window.scrollY/h:0;
+    prog.style.transform='scaleX('+p+')'; top.style.setProperty('--sp',p.toFixed(3));
+    nav.classList.toggle('scrolled',window.scrollY>8); top.classList.toggle('show',window.scrollY>600);
+    var mid=window.innerHeight*.35; links.forEach(function(a,i){var r=secs[i]&&secs[i].getBoundingClientRect();a.classList.toggle('active',!!r&&r.top<mid&&r.bottom>mid);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); onScroll();
+})();
+</script>
+
+</body>
+</html>

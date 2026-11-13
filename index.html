@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Plan snage, kondicije i ishrane za žene koje žele merljiv napredak, više snage i bolje zdravlje. Natalija i Anđela.">
 <title>SVOJA 360 | Trening po tvom planu</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -296,7 +297,8 @@ section{padding-block:clamp(56px,9vw,120px)}
 .together em{color:var(--mint)}
 .together p{color:var(--band-muted);max-width:56ch;margin-top:12px}
 /* cene */
-.bill{display:flex;width:max-content;margin:0 auto 22px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;position:relative}
+.bill-row{display:flex;justify-content:center;width:100%;margin:0 0 22px}
+.bill{display:flex;width:max-content;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;position:relative}
 .bill button{position:relative;z-index:1;padding:10px 18px;min-height:42px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--muted);transition:color .3s}
 .bill button[aria-pressed="true"]{color:var(--bg)}
 .bill .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--ink);transition:transform .5s var(--ease)}
@@ -602,10 +604,12 @@ footer nav a:hover{color:var(--mint)}
       <h2>Izaberi svoj <em>ritam.</em></h2>
       <p class="lead">Oba paketa uključuju plan treninga i ishrane, nedeljni pregled i podršku. Izaberi tri ili šest meseci.</p>
     </div>
-    <div class="bill reveal" id="bill" role="group" aria-label="Način plaćanja">
-      <i class="pill" aria-hidden="true"></i>
-      <button aria-pressed="true" data-bill="one">Jednokratno</button>
-      <button aria-pressed="false" data-bill="two">U 2 rate</button>
+    <div class="bill-row reveal">
+      <div class="bill" id="bill" role="group" aria-label="Način plaćanja">
+        <i class="pill" aria-hidden="true"></i>
+        <button aria-pressed="true" data-bill="one">Jednokratno</button>
+        <button aria-pressed="false" data-bill="two">U 2 rate</button>
+      </div>
     </div>
     <div class="plans">
       <article class="plan reveal" style="--d:0">

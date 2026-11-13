@@ -105,7 +105,7 @@ section{padding-block:clamp(56px,9vw,120px)}
 /* ulazne animacije */
 .up{animation:up .9s var(--ease) both;animation-delay:calc(var(--i,0)*110ms)}
 @keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-.js .reveal{opacity:.2;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
+.js .reveal{opacity:0;transform:translateY(24px) scale(.985);transition:opacity .75s var(--ease),transform .75s var(--ease);transition-delay:calc(var(--d,0)*100ms)}
 .js .reveal.in{opacity:1;transform:none}
 
 .head>.eyebrow:first-child{display:inline-flex;align-items:center;gap:10px}
@@ -158,13 +158,15 @@ section{padding-block:clamp(56px,9vw,120px)}
 
 /* marquee */
 .marquee{background:var(--band);color:var(--band-fg);overflow:hidden;padding-block:20px}
-.track{display:flex;gap:56px;width:max-content;animation:scroll 40s linear infinite}
-.track a{font-family:var(--display);font-size:1.65rem;white-space:nowrap;text-decoration:none;transition:color .25s}
+.track{display:flex;width:max-content;animation:scroll 38s linear infinite;will-change:transform}
+.track-set{display:flex;align-items:center}
+.track-set>*{font-family:var(--display);font-size:1.65rem;white-space:nowrap}
+.track a{text-decoration:none;transition:color .25s}
 .track a:hover{color:var(--mint)}
-.track a::after{content:"✦";margin-left:56px;color:var(--rasp);font-size:.9rem;vertical-align:middle}
+.track-set>*::after{content:"✦";margin:0 56px;color:var(--rasp);font-size:.9rem;vertical-align:middle}
 .marquee:hover .track{animation-play-state:paused}
 @keyframes scroll{to{transform:translateX(-50%)}}
-@media(max-width:600px){.track a{font-size:1.35rem}.track{animation-duration:30s}}
+@media(max-width:600px){.track-set>*{font-size:1.35rem}.track{animation-duration:30s}.track-set>*::after{margin-inline:34px}}
 
 /* crne sekcije */
 .dark{background:var(--band);color:var(--band-fg)}
@@ -297,7 +299,7 @@ section{padding-block:clamp(56px,9vw,120px)}
 .together em{color:var(--mint)}
 .together p{color:var(--band-muted);max-width:56ch;margin-top:12px}
 /* cene */
-.bill-row{display:flex;justify-content:center;width:100%;margin:0 0 22px}
+.bill-row{display:flex;justify-content:center;width:100vw;margin:0 0 22px min(0px,calc((100% - 100vw)/2))}
 .bill{display:flex;width:max-content;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;position:relative}
 .bill button{position:relative;z-index:1;padding:10px 18px;min-height:42px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--muted);transition:color .3s}
 .bill button[aria-pressed="true"]{color:var(--bg)}
@@ -392,6 +394,11 @@ footer nav a:hover{color:var(--mint)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
   .js .reveal{opacity:1;transform:none}
+  .marquee{overflow-x:auto}
+  .marquee .track{width:100%;animation:none;will-change:auto}
+  .marquee .track-set:first-child{flex-wrap:wrap;gap:0 10px}
+  .marquee .track-set[aria-hidden="true"]{display:none}
+  .marquee .track-set>*::after{margin-inline:10px}
   .check path{stroke-dashoffset:0}
   .hl{background-size:100% 100%}
   .head>.eyebrow:first-child::before{width:30px}
@@ -428,7 +435,7 @@ footer nav a:hover{color:var(--mint)}
     <div class="hero-copy">
       <span class="eyebrow up" style="--i:0">Za žene koje vole brojke i žele da vide svoj napredak.</span>
       <h1 id="h1">Imaš plan za posao. <em>Hajde da napravimo jedan i za trening.</em></h1>
-      <p class="lead up" style="--i:3">Već treniraš. Povezaćemo snagu, kondiciju i ishranu u plan koji se uklapa u tvoj život.</p>
+      <p class="lead up" style="--i:3">Povezaćemo snagu, kondiciju i ishranu u plan koji ti pomaže da budeš brža, snažnija i zdravija.</p>
       <div class="cta-row up" style="--i:4">
         <a class="btn" href="#prijava">Zakaži razgovor <span class="arr">→</span></a>
         <a class="btn ghost" href="#kako">Kako radimo</a>
@@ -465,6 +472,17 @@ footer nav a:hover{color:var(--mint)}
 
 
 
+
+<div class="marquee" role="region" aria-label="Oblasti u kojima ti pomažemo">
+  <div class="track">
+    <div class="track-set">
+      <a href="#program">Plan snage</a><a href="#program">Kondicija i trčanje</a><a href="#program">Priprema za trku</a><a href="#program">Ishrana i obroci</a><a href="#program">Hormonsko zdravlje</a><a href="#program">Oporavak i san</a><a href="#program">Mobilnost</a><a href="#kako">Praćenje napretka</a><a href="#kako">Plan za gust raspored</a><a href="#tim">Podrška stručnjaka</a>
+    </div>
+    <div class="track-set" aria-hidden="true">
+      <span>Plan snage</span><span>Kondicija i trčanje</span><span>Priprema za trku</span><span>Ishrana i obroci</span><span>Hormonsko zdravlje</span><span>Oporavak i san</span><span>Mobilnost</span><span>Praćenje napretka</span><span>Plan za gust raspored</span><span>Podrška stručnjaka</span>
+    </div>
+  </div>
+</div>
 
 <section id="program" style="padding-top:0">
   <div class="wrap">
